@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Data from './Data';
+import App2 from './App2';
 import './App.css';
 
 class App extends Component {
@@ -36,7 +37,11 @@ class App extends Component {
             return (<div>Cargando los datos de hoy...</div>)
         }
         return (
-            <Data confirmed={this.state.confirmed} deaths={this.state.deaths} recovered={this.state.recovered} />
+            <>
+                <Data confirmed={this.state.confirmed} deaths={this.state.deaths} recovered={this.state.recovered} />
+                <App2 />
+            </>
+
         );
     }
 }
