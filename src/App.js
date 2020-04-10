@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Data from './Data';
 import './App.css';
 
 class App extends Component {
@@ -30,27 +31,14 @@ class App extends Component {
         console.log('Will unmount');
     }
 
-    handleInput = event => {
-        const value = event.target.value;
-        this.setState({ count: value });
-    }
-
-
     render() {
         if (this.state.loading) {
             return (<div>Cargando los datos de hoy...</div>)
         }
         return (
-            <>
-                <div> Muertes:  {this.state.deaths} </div>
-                <div> Casos confirmados:  {this.state.confirmed} </div>
-                <div> Recuperados:  {this.state.recovered} </div>
-
-            </>
-        )
-
+            <Data confirmed={this.state.confirmed} deaths={this.state.deaths} recovered={this.state.recovered} />
+        );
     }
-
 }
 
 export default App;
