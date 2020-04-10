@@ -4,11 +4,26 @@ import './App.css';
 class App extends Component {
 
     state = {
-        count: 10
+        deaths: null,
+        confirmed: null,
+        recovered: null,
+        loading: true
     };
 
-    componentDidMount() {
-        console.log('Hola Mundo!');
+    async componentDidMount() {
+
+        try {
+            const response = await fetch('https://enrichman.github.io/covid19/world/full.json');
+            const data = await response.json();
+            this.setState({
+                deaths: data.deaths,
+                confirmed: data.confirmed,
+                recovered: data.recovered,
+                loading: false
+            })
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     componentWillUnmount() {
@@ -22,10 +37,15 @@ class App extends Component {
 
 
     render() {
+        if (this.state.loading) {
+            return (<div>Cargando los datos de hoy...</div>)
+        }
         return (
             <>
-                <div> El valor del contador es {this.state.count} </div>
-                <input type="text" value={this.state.count} onChange={this.handleInput} ></input>
+                <div> Muertes:  {this.state.deaths} </div>
+                <div> Casos confirmados:  {this.state.confirmed} </div>
+                <div> Recuperados:  {this.state.recovered} </div>
+
             </>
         )
 
